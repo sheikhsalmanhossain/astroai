@@ -1,8 +1,8 @@
 /* ---------- Tokens ---------- */
 :root {
   --void: #0A0D12;
-  --glass: rgba(13, 17, 23, 0.58);
-  --glass-strong: rgba(10, 13, 18, 0.72);
+  --glass: rgba(10, 13, 18, 0.34);
+  --glass-strong: rgba(10, 13, 18, 0.5);
   --line: rgba(255, 255, 255, 0.14);
   --ink: #F3F4F6;
   --ink-dim: #A6ACB8;
@@ -99,7 +99,8 @@ a { color: inherit; }
   padding: 18px clamp(20px, 5vw, 64px);
   margin: 16px clamp(12px, 3vw, 40px) 0;
   background: var(--glass);
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--line);
   border-radius: 16px;
 }
@@ -173,8 +174,8 @@ a { color: inherit; }
 .section-inner,
 .footer {
   background: var(--glass);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--line);
   border-radius: 20px;
   box-shadow: 0 20px 60px rgba(0,0,0,0.35);
