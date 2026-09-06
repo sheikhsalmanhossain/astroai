@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Astrosynthetic — An intelligence that grows with you</title>
+<meta name="description" content="Astrosynthetic is an AI companion built to evolve in step with AGI — learning your world, remembering your history, and staying aligned as it grows more capable.">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%2305070A'/%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='%234FE3C8' stroke-width='4'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%234FE3C8'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Fixed background layer: the synthetic core, reacts to scroll -->
+<div class="robot-field" aria-hidden="true">
+  <div class="starfield"></div>
+
+  <svg class="robot" id="robot-svg" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#4FE3C8" stop-opacity="0.95"/>
+        <stop offset="45%" stop-color="#4FE3C8" stop-opacity="0.35"/>
+        <stop offset="100%" stop-color="#4FE3C8" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="headStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#A78BFA"/>
+        <stop offset="100%" stop-color="#4FE3C8"/>
+      </linearGradient>
+    </defs>
+
+    <!-- outer orbit ring -->
+    <g class="ring ring-outer">
+      <circle cx="620" cy="470" r="360" fill="none" stroke="#232B3A" stroke-width="1.5"/>
+      <circle cx="620" cy="110" r="5" fill="#A78BFA"/>
+      <circle cx="960" cy="470" r="4" fill="#4FE3C8"/>
+    </g>
+
+    <!-- mid orbit ring -->
+    <g class="ring ring-mid">
+      <circle cx="620" cy="470" r="260" fill="none" stroke="#232B3A" stroke-width="1.5" stroke-dasharray="2 14"/>
+    </g>
+
+    <!-- faceted head silhouette -->
+    <g class="head">
+      <polygon points="620,190 760,300 800,470 760,650 620,750 480,650 440,470 480,300"
+               fill="#0B0F16" stroke="url(#headStroke)" stroke-width="2.5" opacity="0.9"/>
+      <polygon points="620,260 720,335 748,470 720,610 620,685 520,610 492,470 520,335"
+               fill="none" stroke="#232B3A" stroke-width="1"/>
+      <!-- eye line -->
+      <rect class="eye" x="560" y="450" width="120" height="10" rx="5" fill="#4FE3C8"/>
+    </g>
+
+    <!-- core glow -->
+    <circle class="core-glow" cx="620" cy="470" r="220" fill="url(#coreGlow)"/>
+    <circle class="core-dot" cx="620" cy="470" r="14" fill="#EDEFF3"/>
+
+    <!-- drifting particle nodes -->
+    <g class="particles">
+      <circle cx="340" cy="270" r="3" fill="#4FE3C8"/>
+      <circle cx="900" cy="260" r="3" fill="#A78BFA"/>
+      <circle cx="320" cy="660" r="2.5" fill="#A78BFA"/>
+      <circle cx="880" cy="700" r="3" fill="#4FE3C8"/>
+      <circle cx="620" cy="120" r="2.5" fill="#EDEFF3"/>
+    </g>
+  </svg>
+</div>
+
+<!-- Foreground content -->
+<div class="content">
+
+  <header class="nav">
+    <a href="#top" class="wordmark">Astrosynthetic</a>
+    <nav class="nav-links">
+      <a href="#origin">Origin</a>
+      <a href="#capabilities">Capabilities</a>
+      <a href="#roadmap">Roadmap</a>
+    </nav>
+    <a href="#access" class="btn btn-ghost">Join the waitlist</a>
+  </header>
+
+  <main>
+
+    <section id="top" class="hero">
+      <div class="hero-copy">
+        <p class="tag">SYS.04 — early access</p>
+        <h1>An intelligence<br>that grows with you.</h1>
+        <p class="lede">Astrosynthetic is an AI companion built to evolve in step with AGI — learning your world, remembering your history, and staying aligned as it grows more capable.</p>
+        <div class="hero-actions">
+          <a href="#access" class="btn btn-primary">Join the waitlist</a>
+          <a href="#origin" class="btn btn-text">See how it works ↓</a>
+        </div>
+      </div>
+      <div class="scroll-cue">
+        <span></span>
+        <p>Scroll to wake it up</p>
+      </div>
+    </section>
+
+    <section id="origin" class="section">
+      <div class="section-inner">
+        <h2>Built for the transition, not just today's models.</h2>
+        <p>Most assistants are wired to one model, at one point in time. When the model underneath changes, the relationship starts over. Astrosynthetic is designed the other way around: the companion is the constant, and the intelligence powering it is free to keep improving underneath.</p>
+        <p>That means the version of Astrosynthetic you meet today keeps its memory, its judgment about you, and its voice — even as the reasoning underneath it scales from today's models toward AGI.</p>
+      </div>
+    </section>
+
+    <section id="capabilities" class="section">
+      <div class="section-inner">
+        <h2>What stays true as it scales</h2>
+        <ul class="rail">
+          <li class="rail-item">
+            <span class="rail-dot"></span>
+            <div>
+              <h3>Continuous memory</h3>
+              <p>Carries context and relationship history across every model upgrade — nothing gets reset when the intelligence underneath changes.</p>
+            </div>
+          </li>
+          <li class="rail-item">
+            <span class="rail-dot"></span>
+            <div>
+              <h3>Adaptive reasoning</h3>
+              <p>Draws on the strongest available model for the task in front of it, swapped in behind the scenes as capabilities improve.</p>
+            </div>
+          </li>
+          <li class="rail-item">
+            <span class="rail-dot"></span>
+            <div>
+              <h3>Grounded presence</h3>
+              <p>Voice, tone and judgment stay consistent, so a smarter model never feels like a stranger wearing a familiar name.</p>
+            </div>
+          </li>
+          <li class="rail-item">
+            <span class="rail-dot"></span>
+            <div>
+              <h3>Aligned growth</h3>
+              <p>Every capability increase ships behind the same safety and consent boundaries you set on day one — growth never quietly loosens them.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="roadmap" class="section">
+      <div class="section-inner">
+        <h2>How Astrosynthetic scales toward AGI</h2>
+        <ol class="timeline">
+          <li>
+            <span class="stage">Stage 01</span>
+            <h3>Companion</h3>
+            <p>Learns your context, routines and preferences. Available now, in early access.</p>
+          </li>
+          <li>
+            <span class="stage">Stage 02</span>
+            <h3>Collaborator</h3>
+            <p>Plans and executes multi-step work on your behalf, checking in at the decisions that matter.</p>
+          </li>
+          <li>
+            <span class="stage">Stage 03</span>
+            <h3>Steward</h3>
+            <p>Manages ongoing responsibilities independently, inside boundaries you define and can always see.</p>
+          </li>
+          <li>
+            <span class="stage">Stage 04</span>
+            <h3>Peer</h3>
+            <p>Reasons alongside you at a general level — the point most people mean when they say AGI.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="access" class="section section-access">
+      <div class="section-inner center">
+        <h2>Get early access</h2>
+        <p>We're letting people in gradually as capacity grows. Leave your email and we'll reach out when it's your turn.</p>
+        <form class="access-form" id="waitlist-form">
+          <label for="email" class="sr-only">Email address</label>
+          <input type="email" id="email" name="email" placeholder="you@domain.com" required>
+          <button type="submit" class="btn btn-primary">Request access</button>
+        </form>
+        <p class="form-note" id="form-note" role="status"></p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <span class="wordmark small">Astrosynthetic</span>
+    <p>&copy; <span id="year"></span> Astrosynthetic. Built for what comes after today's models.</p>
+  </footer>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
