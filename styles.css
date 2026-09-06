@@ -1,8 +1,8 @@
 /* ---------- Tokens ---------- */
 :root {
   --void: #0A0D12;
-  --glass: rgba(10, 13, 18, 0.16);
-  --glass-strong: rgba(10, 13, 18, 0.3);
+  --glass: rgba(10, 13, 18, 0.06);
+  --glass-strong: rgba(10, 13, 18, 0.18);
   --line: rgba(255, 255, 255, 0.14);
   --ink: #F3F4F6;
   --ink-dim: #A6ACB8;
@@ -81,15 +81,6 @@ a { color: inherit; }
   height: 100%;
   object-fit: cover;
   transform: translate(-50%, -50%);
-}
-
-/* On tall/narrow (portrait phone) screens, "cover" on a 16:9 clip zooms in
-   drastically and crops most of the frame. "contain" instead letterboxes
-   it against the dark void background, which reads intentionally here. */
-@media (max-width: 640px) and (orientation: portrait) {
-  .robot-video {
-    object-fit: contain;
-  }
 }
 
 /* ---------- Content layer ---------- */
@@ -203,7 +194,7 @@ a { color: inherit; }
    needs its own contrast cushion rather than relying on the card alone. */
 .hero-copy h1, .hero-copy p, .hero-copy .tag,
 .section-inner h2, .section-inner h3, .section-inner p, .section-inner .stage {
-  text-shadow: 0 2px 14px rgba(0,0,0,0.75);
+  text-shadow: 0 2px 6px rgba(0,0,0,0.9), 0 0 24px rgba(0,0,0,0.7);
 }
 
 /* ---------- Hero ---------- */
