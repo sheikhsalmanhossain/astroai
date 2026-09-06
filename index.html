@@ -16,55 +16,11 @@
 </head>
 <body>
 
-<!-- Fixed background layer: the robot figure, rises from a crouch to standing as you scroll -->
+<!-- Fixed background layer: an 8-frame turn sequence (assets/robot/frame-01..08.png).
+     script.js swaps the frame based on scroll position so the robot turns and its
+     eyes shift from blue to red as you scroll down. -->
 <div class="robot-field" aria-hidden="true">
-  <svg class="robot" id="robot-svg" viewBox="0 0 600 1000" xmlns="http://www.w3.org/2000/svg">
-    <g class="figure">
-
-      <!-- head, torso, pelvis (static shapes; the whole assembly rises via .figure) -->
-      <g class="body-core">
-        <circle cx="300" cy="150" r="55"/>
-        <!-- eyes: white/idle at rest, cross-fade to a red glow as you scroll -->
-        <rect class="visor visor-base" x="272" y="140" width="56" height="10" rx="5"/>
-        <rect class="visor visor-glow" x="272" y="140" width="56" height="10" rx="5"/>
-        <rect x="285" y="200" width="30" height="20"/>
-        <rect x="225" y="218" width="150" height="240" rx="26"/>
-        <rect class="trim" x="298" y="230" width="4" height="210" rx="2"/>
-        <rect x="245" y="450" width="110" height="70" rx="22"/>
-      </g>
-
-      <!-- joint caps: small metallic accent at each socket -->
-      <circle class="joint" cx="235" cy="240" r="10"/>
-      <circle class="joint" cx="365" cy="240" r="10"/>
-      <circle class="joint" cx="255" cy="515" r="12"/>
-      <circle class="joint" cx="345" cy="515" r="12"/>
-
-      <!-- arms: rest forward when crouched, hang straight when standing -->
-      <g class="arm arm-l">
-        <rect x="-17" y="0" width="34" height="220" rx="17"/>
-      </g>
-      <g class="arm arm-r">
-        <rect x="-17" y="0" width="34" height="220" rx="17"/>
-      </g>
-
-      <!-- legs: hip -> thigh -> knee -> shin, nested so each joint carries the one below it -->
-      <g class="thigh thigh-l">
-        <rect x="-20" y="0" width="40" height="150" rx="18"/>
-        <g class="shin shin-l">
-          <rect x="-18" y="0" width="36" height="160" rx="16"/>
-          <rect x="-16" y="152" width="64" height="20" rx="8"/>
-        </g>
-      </g>
-      <g class="thigh thigh-r">
-        <rect x="-20" y="0" width="40" height="150" rx="18"/>
-        <g class="shin shin-r">
-          <rect x="-18" y="0" width="36" height="160" rx="16"/>
-          <rect x="-16" y="152" width="64" height="20" rx="8"/>
-        </g>
-      </g>
-
-    </g>
-  </svg>
+  <img class="robot-image" id="robot-frame" src="assets/robot/frame-01.png" alt="">
 </div>
 
 <!-- Foreground content -->

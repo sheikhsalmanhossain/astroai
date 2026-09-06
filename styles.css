@@ -5,11 +5,6 @@
   --line: #E1E2E5;
   --ink: #17181B;
   --ink-dim: #6B6D74;
-  --robot: #33343A;
-  --robot-dark: #1E1F24;
-  --copper: #C97A4A;
-  --eye-idle: #F4F4F5;
-  --eye-alert: #FF3B30;
 
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -63,120 +58,31 @@ a { color: inherit; }
   outline-offset: 3px;
 }
 
-/* ---------- Background robot layer ---------- */
-/* This layer, the content layer below, and the robot's own shapes are all
-   kept translucent so the three read as stacked, see-through planes rather
-   than opaque panels stacked on top of each other. */
+/* ---------- Background robot frame-sequence layer ---------- */
+/* script.js swaps this <img>'s src across assets/robot/frame-01..08.png based
+   on scroll position, so the turn + eye-color change plays back as you scroll.
+   The content layer above stays translucent so this shows through it. */
 .robot-field {
   position: fixed;
   inset: 0;
   z-index: 0;
   overflow: hidden;
   background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Full-screen background presence: sized to viewport height, centered */
-.robot {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  height: 100vh;
+.robot-image {
+  height: 90vh;
   width: auto;
-  transform: translate(-50%, -50%);
+  max-width: none;
+  object-fit: contain;
+  opacity: 0.95;
 }
 
 @media (max-width: 900px) {
-  .robot {
-    height: 78vh;
-  }
-}
-
-.robot .body-core rect,
-.robot .body-core circle,
-.robot .arm rect,
-.robot .thigh rect,
-.robot .shin rect {
-  fill: var(--robot);
-  fill-opacity: 0.9;
-  stroke: var(--robot-dark);
-  stroke-width: 1.5;
-}
-
-/* eyes: idle white fades out, red alert glow fades in, as you scroll
-   (selectors include "rect" to out-specificity the bulk body-core rule above) */
-.robot .body-core rect.visor-base {
-  fill: var(--eye-idle);
-  fill-opacity: calc(1 - var(--progress) * 0.95);
-  stroke: none;
-}
-.robot .body-core rect.visor-glow {
-  fill: var(--eye-alert);
-  fill-opacity: var(--progress);
-  stroke: none;
-  filter: drop-shadow(0 0 8px rgba(255, 59, 48, calc(var(--progress) * 0.85)));
-}
-
-/* copper accent trim: chest centerline */
-.robot .body-core rect.trim {
-  fill: var(--copper);
-  fill-opacity: 0.85;
-  stroke: none;
-}
-.robot .joint {
-  fill: var(--copper);
-  fill-opacity: 0.9;
-  stroke: var(--robot-dark);
-  stroke-width: 1;
-}
-
-/* The whole figure rises as legs straighten: crouched + lower at progress 0,
-   full height at progress 1. */
-.figure {
-  transform-origin: 0 0;
-  transform: translateY(calc((1 - var(--progress)) * 74px));
-  transition: transform 0.05s linear;
-}
-
-/* Arms: rest forward toward the knees when crouched, hang straight when standing */
-.arm-l {
-  transform-origin: 0 0;
-  transform: translate(235px, 240px) rotate(calc((1 - var(--progress)) * 55deg));
-  transition: transform 0.05s linear;
-}
-.arm-r {
-  transform-origin: 0 0;
-  transform: translate(365px, 240px) rotate(calc((1 - var(--progress)) * -55deg));
-  transition: transform 0.05s linear;
-}
-
-/* Thighs: splay outward from the hip when crouched, hang vertical when standing */
-.thigh-l {
-  transform-origin: 0 0;
-  transform: translate(255px, 515px) rotate(calc((1 - var(--progress)) * 42deg));
-  transition: transform 0.05s linear;
-}
-.thigh-r {
-  transform-origin: 0 0;
-  transform: translate(345px, 515px) rotate(calc((1 - var(--progress)) * -42deg));
-  transition: transform 0.05s linear;
-}
-
-/* Shins: bent back under the thigh when crouched, extended when standing */
-.shin-l {
-  transform-origin: 0 0;
-  transform: translate(0px, 150px) rotate(calc((1 - var(--progress)) * -78deg));
-  transition: transform 0.05s linear;
-}
-.shin-r {
-  transform-origin: 0 0;
-  transform: translate(0px, 150px) rotate(calc((1 - var(--progress)) * 78deg));
-  transition: transform 0.05s linear;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .figure, .arm-l, .arm-r, .thigh-l, .thigh-r, .shin-l, .shin-r {
-    transition: none;
-  }
+  .robot-image { height: 72vh; }
 }
 
 /* ---------- Content layer ---------- */
