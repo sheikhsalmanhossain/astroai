@@ -1,17 +1,20 @@
 /* ---------- Tokens ---------- */
 :root {
-  --paper: #FFFFFF;
-  --panel: #F4F4F5;
-  --line: #E1E2E5;
-  --ink: #17181B;
-  --ink-dim: #6B6D74;
+  --void: #0A0D12;
+  --glass: rgba(13, 17, 23, 0.58);
+  --glass-strong: rgba(10, 13, 18, 0.72);
+  --line: rgba(255, 255, 255, 0.14);
+  --ink: #F3F4F6;
+  --ink-dim: #A6ACB8;
+  --accent: #4FE3C8;
 
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  --progress: 0; /* set by script.js, 0 → 1 across the page: 0 = crouched, 1 = standing */
+  --progress: 0; /* set by script.js, 0 → 1 across the page — scrubs the robot video */
   --max-w: 1160px;
+  --card-pad: clamp(28px, 4vw, 48px);
 }
 
 * { box-sizing: border-box; }
@@ -24,7 +27,7 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background: #0A0D12;
+  background: var(--void);
   color: var(--ink);
   font-family: var(--font-body);
   line-height: 1.6;
@@ -54,7 +57,7 @@ a { color: inherit; }
 }
 
 :focus-visible {
-  outline: 2px solid var(--ink);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
@@ -67,7 +70,7 @@ a { color: inherit; }
   inset: 0;
   z-index: 0;
   overflow: hidden;
-  background: #0A0D12;
+  background: var(--void);
 }
 
 .robot-video {
@@ -93,9 +96,12 @@ a { color: inherit; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 22px clamp(20px, 5vw, 64px);
-  background: linear-gradient(to bottom, rgba(255,255,255,0.88), rgba(255,255,255,0));
-  backdrop-filter: blur(6px);
+  padding: 18px clamp(20px, 5vw, 64px);
+  margin: 16px clamp(12px, 3vw, 40px) 0;
+  background: var(--glass);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--line);
+  border-radius: 16px;
 }
 
 .wordmark {
@@ -143,22 +149,36 @@ a { color: inherit; }
 
 .btn-primary {
   background: var(--ink);
-  color: #FFFFFF;
+  color: #0A0D12;
 }
-.btn-primary:hover { background: #34363C; }
+.btn-primary:hover { background: #FFFFFF; }
 
 .btn-ghost {
   border-color: var(--line);
   color: var(--ink);
-  background: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.06);
 }
-.btn-ghost:hover { border-color: var(--ink); }
+.btn-ghost:hover { border-color: rgba(255,255,255,0.4); }
 
 .btn-text {
   color: var(--ink-dim);
   padding: 11px 4px;
 }
 .btn-text:hover { color: var(--ink); }
+
+/* ---------- Glass card base ---------- */
+/* Every content panel shares this: a dark frosted card with real breathing
+   room, so text never touches the edges, sitting legibly over the video. */
+.hero-copy,
+.section-inner,
+.footer {
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+}
 
 /* ---------- Hero ---------- */
 .hero {
@@ -173,15 +193,13 @@ a { color: inherit; }
 
 .hero-copy {
   max-width: 640px;
-  background: rgba(255,255,255,0.72);
-  backdrop-filter: blur(2px);
-  border-radius: 20px;
+  padding: var(--card-pad);
 }
 
 .tag {
   font-family: var(--font-mono);
   font-size: 0.8rem;
-  color: var(--ink-dim);
+  color: var(--accent);
   margin-bottom: 18px;
   letter-spacing: 0.02em;
 }
@@ -215,7 +233,7 @@ a { color: inherit; }
 .scroll-cue span {
   width: 1px;
   height: 32px;
-  background: linear-gradient(to bottom, var(--ink), transparent);
+  background: linear-gradient(to bottom, var(--accent), transparent);
   display: block;
 }
 .scroll-cue p {
@@ -226,16 +244,14 @@ a { color: inherit; }
 
 /* ---------- Sections ---------- */
 .section {
-  padding: 130px clamp(20px, 6vw, 80px);
+  padding: 90px clamp(20px, 6vw, 80px);
   max-width: var(--max-w);
   margin: 0 auto;
 }
 
 .section-inner {
   max-width: 720px;
-  background: rgba(255,255,255,0.72);
-  backdrop-filter: blur(2px);
-  border-radius: 20px;
+  padding: var(--card-pad);
 }
 .section-inner.center {
   max-width: 560px;
@@ -278,14 +294,14 @@ a { color: inherit; }
   width: 11px;
   height: 11px;
   border-radius: 50%;
-  background: var(--panel);
+  background: rgba(255,255,255,0.08);
   border: 1.5px solid var(--line);
   transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .rail-item.is-active .rail-dot {
-  background: var(--ink);
-  border-color: var(--ink);
-  box-shadow: 0 0 0 4px rgba(23,24,27,0.08);
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 14px rgba(79,227,200,0.6);
 }
 .rail-item h3 {
   font-size: 1.05rem;
@@ -307,11 +323,11 @@ a { color: inherit; }
   padding-top: 18px;
   transition: border-color 0.3s ease;
 }
-.timeline li.is-active { border-top-color: var(--ink); }
+.timeline li.is-active { border-top-color: var(--accent); }
 .stage {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: var(--ink-dim);
+  color: var(--accent);
   display: block;
   margin-bottom: 10px;
 }
@@ -326,7 +342,7 @@ a { color: inherit; }
 }
 
 /* Access / waitlist */
-.section-access { padding-bottom: 200px; }
+.section-access { padding-bottom: 140px; }
 .access-form {
   display: flex;
   gap: 10px;
@@ -336,7 +352,7 @@ a { color: inherit; }
 .access-form input {
   flex: 1;
   min-width: 220px;
-  background: #FFFFFF;
+  background: rgba(255,255,255,0.06);
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 12px 20px;
@@ -345,27 +361,25 @@ a { color: inherit; }
   font-size: 0.95rem;
 }
 .access-form input::placeholder { color: var(--ink-dim); }
-.access-form input:focus { border-color: var(--ink); outline: none; }
+.access-form input:focus { border-color: var(--accent); outline: none; }
 
 .form-note {
   margin: 16px 0 0;
   font-size: 0.88rem;
   min-height: 1.4em;
-  color: var(--ink);
+  color: var(--accent);
 }
 
 /* ---------- Footer ---------- */
 .footer {
-  padding: 40px clamp(20px, 6vw, 80px) 60px;
+  padding: 32px clamp(20px, 6vw, 48px);
   max-width: var(--max-w);
-  margin: 0 auto;
+  margin: 0 auto 40px;
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: 20px;
   flex-wrap: wrap;
-  border-top: 1px solid var(--line);
-  background: rgba(255,255,255,0.6);
 }
 .footer p {
   margin: 0;
