@@ -74,7 +74,7 @@ a { color: inherit; }
 }
 
 .robot-image {
-  height: 90vh;
+  height: 130vh;
   width: auto;
   max-width: none;
   object-fit: contain;
@@ -82,7 +82,7 @@ a { color: inherit; }
 }
 
 @media (max-width: 900px) {
-  .robot-image { height: 72vh; }
+  .robot-image { height: 95vh; }
 }
 
 /* ---------- Content layer ---------- */
