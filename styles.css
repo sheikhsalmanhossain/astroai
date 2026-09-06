@@ -1,8 +1,8 @@
 /* ---------- Tokens ---------- */
 :root {
   --void: #0A0D12;
-  --glass: rgba(10, 13, 18, 0.34);
-  --glass-strong: rgba(10, 13, 18, 0.5);
+  --glass: rgba(10, 13, 18, 0.16);
+  --glass-strong: rgba(10, 13, 18, 0.3);
   --line: rgba(255, 255, 255, 0.14);
   --ink: #F3F4F6;
   --ink-dim: #A6ACB8;
@@ -110,8 +110,8 @@ a { color: inherit; }
   padding: 16px clamp(16px, 5vw, 64px);
   margin: 12px clamp(10px, 3vw, 40px) 0;
   background: var(--glass);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   border: 1px solid var(--line);
   border-radius: 16px;
 }
@@ -192,11 +192,18 @@ a { color: inherit; }
 .section-inner,
 .footer {
   background: var(--glass);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   border: 1px solid var(--line);
   border-radius: 20px;
   box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+}
+
+/* At this level of transparency the video shows through strongly, so text
+   needs its own contrast cushion rather than relying on the card alone. */
+.hero-copy h1, .hero-copy p, .hero-copy .tag,
+.section-inner h2, .section-inner h3, .section-inner p, .section-inner .stage {
+  text-shadow: 0 2px 14px rgba(0,0,0,0.75);
 }
 
 /* ---------- Hero ---------- */
