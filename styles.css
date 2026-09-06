@@ -83,6 +83,15 @@ a { color: inherit; }
   transform: translate(-50%, -50%);
 }
 
+/* On tall/narrow (portrait phone) screens, "cover" on a 16:9 clip zooms in
+   drastically and crops most of the frame. "contain" instead letterboxes
+   it against the dark void background, which reads intentionally here. */
+@media (max-width: 640px) and (orientation: portrait) {
+  .robot-video {
+    object-fit: contain;
+  }
+}
+
 /* ---------- Content layer ---------- */
 .content {
   position: relative;
@@ -96,13 +105,22 @@ a { color: inherit; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px clamp(20px, 5vw, 64px);
-  margin: 16px clamp(12px, 3vw, 40px) 0;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 16px clamp(16px, 5vw, 64px);
+  margin: 12px clamp(10px, 3vw, 40px) 0;
   background: var(--glass);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--line);
   border-radius: 16px;
+}
+
+@media (max-width: 480px) {
+  .nav .btn-ghost {
+    padding: 9px 16px;
+    font-size: 0.85rem;
+  }
 }
 
 .wordmark {
@@ -184,6 +202,7 @@ a { color: inherit; }
 /* ---------- Hero ---------- */
 .hero {
   min-height: 92vh;
+  min-height: 92dvh;
   display: flex;
   flex-direction: column;
   justify-content: center;
