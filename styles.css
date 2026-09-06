@@ -405,3 +405,12 @@ a { color: inherit; }
   color: var(--ink-dim);
   max-width: none;
 }
+.footer-contact {
+  font-size: 0.85rem;
+  color: var(--ink-dim);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.footer-contact:hover {
+  color: var(--accent);
+}
