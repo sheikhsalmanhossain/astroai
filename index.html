@@ -24,11 +24,20 @@
       <!-- head, torso, pelvis (static shapes; the whole assembly rises via .figure) -->
       <g class="body-core">
         <circle cx="300" cy="150" r="55"/>
-        <rect class="visor" x="272" y="140" width="56" height="10" rx="5"/>
+        <!-- eyes: white/idle at rest, cross-fade to a red glow as you scroll -->
+        <rect class="visor visor-base" x="272" y="140" width="56" height="10" rx="5"/>
+        <rect class="visor visor-glow" x="272" y="140" width="56" height="10" rx="5"/>
         <rect x="285" y="200" width="30" height="20"/>
         <rect x="225" y="218" width="150" height="240" rx="26"/>
+        <rect class="trim" x="298" y="230" width="4" height="210" rx="2"/>
         <rect x="245" y="450" width="110" height="70" rx="22"/>
       </g>
+
+      <!-- joint caps: small metallic accent at each socket -->
+      <circle class="joint" cx="235" cy="240" r="10"/>
+      <circle class="joint" cx="365" cy="240" r="10"/>
+      <circle class="joint" cx="255" cy="515" r="12"/>
+      <circle class="joint" cx="345" cy="515" r="12"/>
 
       <!-- arms: rest forward when crouched, hang straight when standing -->
       <g class="arm arm-l">

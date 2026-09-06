@@ -7,6 +7,9 @@
   --ink-dim: #6B6D74;
   --robot: #33343A;
   --robot-dark: #1E1F24;
+  --copper: #C97A4A;
+  --eye-idle: #F4F4F5;
+  --eye-alert: #FF3B30;
 
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -72,21 +75,19 @@ a { color: inherit; }
   background: transparent;
 }
 
+/* Full-screen background presence: sized to viewport height, centered */
 .robot {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: min(34vw, 460px);
-  height: auto;
-  transform: translate(calc(-50% + 16vw), -50%);
+  height: 100vh;
+  width: auto;
+  transform: translate(-50%, -50%);
 }
 
 @media (max-width: 900px) {
   .robot {
-    width: min(52vw, 380px);
-    top: 40%;
-    transform: translate(-50%, -50%);
-    opacity: 0.5;
+    height: 78vh;
   }
 }
 
@@ -96,15 +97,36 @@ a { color: inherit; }
 .robot .thigh rect,
 .robot .shin rect {
   fill: var(--robot);
-  fill-opacity: 0.88;
+  fill-opacity: 0.9;
   stroke: var(--robot-dark);
   stroke-width: 1.5;
 }
 
-.robot .visor {
-  fill: #FFFFFF;
-  fill-opacity: 0.9;
+/* eyes: idle white fades out, red alert glow fades in, as you scroll
+   (selectors include "rect" to out-specificity the bulk body-core rule above) */
+.robot .body-core rect.visor-base {
+  fill: var(--eye-idle);
+  fill-opacity: calc(1 - var(--progress) * 0.95);
   stroke: none;
+}
+.robot .body-core rect.visor-glow {
+  fill: var(--eye-alert);
+  fill-opacity: var(--progress);
+  stroke: none;
+  filter: drop-shadow(0 0 8px rgba(255, 59, 48, calc(var(--progress) * 0.85)));
+}
+
+/* copper accent trim: chest centerline */
+.robot .body-core rect.trim {
+  fill: var(--copper);
+  fill-opacity: 0.85;
+  stroke: none;
+}
+.robot .joint {
+  fill: var(--copper);
+  fill-opacity: 0.9;
+  stroke: var(--robot-dark);
+  stroke-width: 1;
 }
 
 /* The whole figure rises as legs straighten: crouched + lower at progress 0,
