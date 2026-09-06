@@ -1,43 +1,37 @@
-// Astrosynthetic — scroll-driven robot turn (frame sequence) + section activation
+// Astrosynthetic — scroll-driven robot turn (video scrub) + section activation
 
 (function () {
   const root = document.documentElement;
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // --- Robot frame sequence: preload all 8 frames, then swap the <img> src
-  //     based on scroll progress so the turn + eye-color change plays back. ---
-  const FRAME_COUNT = 8;
-  const framePaths = Array.from(
-    { length: FRAME_COUNT },
-    (_, i) => `assets/robot/frame-${String(i + 1).padStart(2, '0')}.png`
-  );
-  const robotImg = document.getElementById('robot-frame');
-  let framesReady = false;
-  let currentFrameIndex = 0;
+  // --- Robot video: paused, never auto-plays. script.js sets its currentTime
+  //     directly based on scroll position, so scrolling scrubs through the
+  //     clip frame-accurately (the video was encoded with every frame as a
+  //     keyframe specifically so this seeking stays smooth). ---
+  const robotVideo = document.getElementById('robot-video');
+  let videoDuration = 0;
 
-  if (robotImg) {
-    let loadedCount = 0;
-    framePaths.forEach((src) => {
-      const img = new Image();
-      img.onload = img.onerror = () => {
-        loadedCount += 1;
-        if (loadedCount === FRAME_COUNT) framesReady = true;
-      };
-      img.src = src;
+  if (robotVideo) {
+    robotVideo.addEventListener('loadedmetadata', () => {
+      videoDuration = robotVideo.duration || 0;
     });
+    // In case metadata is already cached/available by the time this runs.
+    if (robotVideo.readyState >= 1 && robotVideo.duration) {
+      videoDuration = robotVideo.duration;
+    }
   }
 
-  function setRobotFrame(progress) {
-    if (!robotImg) return;
-    const index = Math.min(FRAME_COUNT - 1, Math.floor(progress * FRAME_COUNT));
-    if (index !== currentFrameIndex) {
-      currentFrameIndex = index;
-      robotImg.src = framePaths[index];
+  function setVideoProgress(progress) {
+    if (!robotVideo || !videoDuration) return;
+    // Clamp slightly inside the end so we never try to seek past the last frame.
+    const target = Math.min(progress * videoDuration, videoDuration - 0.05);
+    if (Math.abs(robotVideo.currentTime - target) > 0.02) {
+      robotVideo.currentTime = target;
     }
   }
 
   // --- Scroll progress drives CSS var --progress (0 → 1 across the page)
-  //     and picks which robot frame is showing. ---
+  //     and scrubs the robot video. ---
   let ticking = false;
 
   function updateProgress() {
@@ -45,7 +39,7 @@
     const docHeight = document.body.scrollHeight - window.innerHeight;
     const progress = docHeight > 0 ? Math.min(Math.max(scrollTop / docHeight, 0), 1) : 0;
     root.style.setProperty('--progress', progress.toFixed(4));
-    setRobotFrame(progress);
+    setVideoProgress(progress);
     ticking = false;
   }
 
@@ -60,11 +54,13 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll);
 
-  // If reduced motion is requested, freeze on a calm mid-sequence frame
-  // instead of continuously swapping images while scrolling.
+  // If reduced motion is requested, freeze on a calm mid-clip frame instead
+  // of continuously seeking the video while scrolling.
   if (reduceMotion) {
     root.style.setProperty('--progress', '0.5');
-    setRobotFrame(0.5);
+    if (robotVideo) {
+      robotVideo.addEventListener('loadedmetadata', () => setVideoProgress(0.5), { once: true });
+    }
     window.removeEventListener('scroll', onScroll);
   }
 

@@ -16,11 +16,20 @@
 </head>
 <body>
 
-<!-- Fixed background layer: an 8-frame turn sequence (assets/robot/frame-01..08.png).
-     script.js swaps the frame based on scroll position so the robot turns and its
-     eyes shift from blue to red as you scroll down. -->
+<!-- Fixed full-screen background layer: a scroll-scrubbed video
+     (assets/robot/turn.mp4). script.js sets the video's currentTime based on
+     scroll position — paused, never auto-playing — so scrolling through the
+     page plays the turn-and-red-eyes clip frame-accurately. -->
 <div class="robot-field" aria-hidden="true">
-  <img class="robot-image" id="robot-frame" src="assets/robot/frame-01.png" alt="">
+  <video
+    class="robot-video"
+    id="robot-video"
+    muted
+    playsinline
+    preload="auto"
+  >
+    <source src="assets/robot/turn.mp4" type="video/mp4">
+  </video>
 </div>
 
 <!-- Foreground content -->

@@ -24,7 +24,7 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background: var(--paper);
+  background: #0A0D12;
   color: var(--ink);
   font-family: var(--font-body);
   line-height: 1.6;
@@ -58,31 +58,26 @@ a { color: inherit; }
   outline-offset: 3px;
 }
 
-/* ---------- Background robot frame-sequence layer ---------- */
-/* script.js swaps this <img>'s src across assets/robot/frame-01..08.png based
-   on scroll position, so the turn + eye-color change plays back as you scroll.
-   The content layer above stays translucent so this shows through it. */
+/* ---------- Background robot video layer ---------- */
+/* script.js sets this <video>'s currentTime based on scroll position (the
+   video itself is paused, never plays on its own) so scrolling scrubs
+   through the turn-and-eyes clip. Sized to cover the full viewport. */
 .robot-field {
   position: fixed;
   inset: 0;
   z-index: 0;
   overflow: hidden;
-  background: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: #0A0D12;
 }
 
-.robot-image {
-  height: 130vh;
-  width: auto;
-  max-width: none;
-  object-fit: contain;
-  opacity: 0.95;
-}
-
-@media (max-width: 900px) {
-  .robot-image { height: 95vh; }
+.robot-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
 }
 
 /* ---------- Content layer ---------- */
